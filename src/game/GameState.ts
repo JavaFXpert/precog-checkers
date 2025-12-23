@@ -62,6 +62,9 @@ export class GameState {
     if (this.status !== GameStatus.Active) return false
     if (this.currentPlayer !== this.humanPlayer) return false
 
+    // Clear AI move highlight when human interacts
+    this.lastAIMove = null
+
     const piece = this.board.getPieceAt(row, col)
     if (!piece || piece.player !== this.currentPlayer) {
       this.selectedPiece = null
