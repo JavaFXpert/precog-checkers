@@ -127,6 +127,14 @@ export class Renderer {
           if (piece.type === PieceType.King) {
             pieceElement.classList.add('king')
           }
+          // Highlight the AI's last moved piece
+          if (
+            this.gameState.lastAIMove &&
+            this.gameState.lastAIMove.row === row &&
+            this.gameState.lastAIMove.col === col
+          ) {
+            pieceElement.classList.add('ai-last-move')
+          }
           square.appendChild(pieceElement)
         }
 

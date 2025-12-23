@@ -30,6 +30,7 @@ export class GameState {
   aiDepth: number
   visionsEnabled: boolean
   currentVisions: FutureVision[]
+  lastAIMove: { row: number; col: number } | null
 
   private onUpdate: (() => void) | null = null
   private onAIThinking: ((thinking: boolean) => void) | null = null
@@ -46,6 +47,7 @@ export class GameState {
     this.aiDepth = aiDepth
     this.visionsEnabled = true
     this.currentVisions = []
+    this.lastAIMove = null
   }
 
   setUpdateCallback(callback: () => void): void {
@@ -98,6 +100,9 @@ export class GameState {
 
     const move = this.validMoves.find(m => m.toRow === toRow && m.toCol === toCol)
     if (!move) return false
+
+    // Clear AI move highlight when human moves
+    this.lastAIMove = null
 
     this.executeMove(this.selectedPiece.row, this.selectedPiece.col, move)
     return true
@@ -199,6 +204,7 @@ export class GameState {
       this.moveHistory.push(record)
 
       // Handle multi-jump for AI
+      let finalPos = { row: result.move.toRow, col: result.move.toCol }
       if (result.move.type === MoveType.Capture) {
         let currentPos = { row: result.move.toRow, col: result.move.toCol }
         let moreCapturesLoop = true
@@ -220,11 +226,15 @@ export class GameState {
             })
 
             currentPos = { row: nextCapture.toRow, col: nextCapture.toCol }
+            finalPos = currentPos
           } else {
             moreCapturesLoop = false
           }
         }
       }
+
+      // Track the AI's last move for visual feedback
+      this.lastAIMove = finalPos
 
       this.switchTurn()
     } else {
@@ -288,6 +298,7 @@ export class GameState {
     this.validMoves = []
     this.moveHistory = []
     this.currentVisions = []
+    this.lastAIMove = null
     this.triggerUpdate()
   }
 
