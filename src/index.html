@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Precog Checkers - Minority Report Edition</title>
+  <link rel="stylesheet" href="./ui/styles.css">
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <div class="container">
+    <header class="header">
+      <h1 class="title">PRECOG CHECKERS</h1>
+      <p class="subtitle">Pre-Crime Division - Game Analysis Unit</p>
+    </header>
+
+    <div class="game-area">
+      <aside class="vision-panel left-panel">
+        <h2 class="panel-title">PRECOG VISIONS</h2>
+        <div id="visions-container" class="visions-container">
+          <div class="vision-placeholder">
+            <p>Make a move to see possible futures...</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="board-container">
+        <div class="hud">
+          <div class="hud-item">
+            <span class="hud-label">CURRENT TURN</span>
+            <span id="current-turn" class="hud-value">RED</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">STATUS</span>
+            <span id="game-status" class="hud-value">ACTIVE</span>
+          </div>
+        </div>
+
+        <div id="board" class="board"></div>
+
+        <div class="controls">
+          <button id="new-game-btn" class="holo-button">NEW GAME</button>
+          <button id="toggle-visions-btn" class="holo-button">TOGGLE VISIONS</button>
+        </div>
+      </main>
+
+      <aside class="info-panel right-panel">
+        <h2 class="panel-title">THREAT ANALYSIS</h2>
+        <div id="threat-container" class="threat-container">
+          <div class="threat-item safe">
+            <span class="threat-icon">&#9679;</span>
+            <span class="threat-text">No immediate threats detected</span>
+          </div>
+        </div>
+
+        <h2 class="panel-title">MOVE HISTORY</h2>
+        <div id="history-container" class="history-container">
+          <p class="history-placeholder">No moves yet...</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <p>PRECRIME GAMING DIVISION &bull; DEPARTMENT OF PRE-JUSTICE</p>
+    </footer>
+  </div>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>
