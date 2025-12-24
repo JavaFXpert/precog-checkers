@@ -218,11 +218,11 @@ body {
 }
 
 .square.light {
-  background: rgba(100, 120, 140, 0.2);
+  background: rgba(140, 160, 180, 0.4);
 }
 
 .square.dark {
-  background: rgba(20, 40, 60, 0.8);
+  background: rgba(15, 30, 50, 0.9);
 }
 
 .square.valid-move {
@@ -290,7 +290,7 @@ body {
 }
 
 .piece.king::after {
-  content: '\u265A';
+  content: '\265A';
   font-size: 24px;
   color: gold;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);

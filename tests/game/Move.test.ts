@@ -107,9 +107,22 @@ describe('MoveValidator', () => {
       expect(captureToBlocked.length).toBe(0)
     })
 
-    it('should allow regular piece to capture backward', () => {
+    it('should NOT allow regular piece to capture backward', () => {
       const board = Board.empty()
       board.setPiece(4, 3, { player: Player.Red, type: PieceType.Regular })
+      board.setPiece(3, 2, { player: Player.Black, type: PieceType.Regular })
+
+      const moves = MoveValidator.getValidMoves(board, 4, 3)
+      // Regular pieces can only capture forward, not backward
+      const backwardCaptures = moves.filter(
+        m => m.type === MoveType.Capture && m.toRow < 4
+      )
+      expect(backwardCaptures.length).toBe(0)
+    })
+
+    it('should allow king to capture backward', () => {
+      const board = Board.empty()
+      board.setPiece(4, 3, { player: Player.Red, type: PieceType.King })
       board.setPiece(3, 2, { player: Player.Black, type: PieceType.Regular })
 
       const moves = MoveValidator.getValidMoves(board, 4, 3)

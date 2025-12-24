@@ -99,8 +99,8 @@ export class MoveValidator {
     type: PieceType
   ): Move[] {
     const moves: Move[] = []
-    // Captures can be in any direction (even regular pieces can capture backward)
-    const directions = this.DIRECTIONS
+    // Only kings can capture in any direction; regular pieces capture forward only
+    const directions = this.getDirections(player, type)
 
     for (const [dr, dc] of directions) {
       const jumpedRow = row + dr
